@@ -86,7 +86,7 @@ WHERE
         AND to_date LIKE '9999%';
 
 -- select * from salaries;
-
+-- 9) 어떤 직책들이 있나요? 중복 없이 이름이 긴 순서대로 출력해 보세요.
 SELECT DISTINCT
     title
 FROM
