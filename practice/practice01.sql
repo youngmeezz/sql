@@ -44,8 +44,61 @@ SELECT
             employees
         GROUP BY gender
         HAVING gender = 'F') AS '여직원';
+     
+SELECT 
+    (SELECT 
+            COUNT(*)
+        FROM
+            employees
+		WHERE gender = 'M') AS '남직원',
+    (SELECT 
+            COUNT(*)
+        FROM
+            employees
+		WHERE gender = 'F') AS '여직원';
+        
+
+SELECT 
+    *
+FROM
+    (SELECT 
+        COUNT(*) AS 남직원
+    FROM
+        employees
+    WHERE
+        gender = 'm') AS m,
+    (SELECT 
+        COUNT(*) AS 여직원
+    FROM
+        employees
+    WHERE
+        gender = 'f') AS f;
 
 
+SELECT 
+    SUM(CASE
+        WHEN gender = 'm' THEN 1
+        ELSE 0
+    END) AS '남직원',
+    SUM(CASE
+        WHEN gender = 'f' THEN 1
+        ELSE 0
+    END) AS '여직원'
+FROM
+    employees;
+		
+SELECT 
+    SUM(CASE
+        WHEN gender = 'F' THEN '1'
+        ELSE '0'
+    END) AS 여직원,
+    SUM(CASE
+        WHEN gender = 'M' THEN '1'
+        ELSE '0'
+    END) AS 남직원
+FROM
+    employees;
+  
 -- 04) 현재 근무하고 있는 직원 수는 몇 명입니까? (salaries 테이블을 사용합니다.) 
 SELECT 
     COUNT(*) AS 직원수
@@ -68,8 +121,8 @@ FROM
 WHERE
     to_date LIKE '9999%';
 
+-- select * from dept_manager;
 
--- 07) 전체 부서를 출력하려고 합니다. 순서는 부서이름이 긴 순서대로 출력해 보세요.
 SELECT 
     dept_name
 FROM
@@ -93,7 +146,7 @@ FROM
     titles
 ORDER BY LENGTH(title) DESC;
 
--- 10) 현재 Enginner 직책의 사원은 총 몇 명입니까?
+-- 10) 현재 Engineer 직책의 사원은 총 몇 명입니까?
 SELECT 
     COUNT(*) AS '직책의 사원수'
 FROM
